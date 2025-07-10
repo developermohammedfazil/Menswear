@@ -3,877 +3,450 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StyleCraft - Premium Menswear</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navbar Styles */
-        .navbar {
-            position: fixed;
-            top:0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #333;
-            text-decoration: none;
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: #333;
-            transition: 0.3s;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            margin-top:4rem;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 0 2rem;
-            z-index: 1;
-            position: relative;
-        }
-
-        .hero-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 2rem;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" fill="rgba(255,255,255,0.2)"/><circle cx="100" cy="80" r="30" fill="rgba(255,255,255,0.3)"/><rect x="85" y="110" width="30" height="60" fill="rgba(255,255,255,0.3)"/></svg>') center/cover;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: slideUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: slideUp 1s ease-out 0.3s both;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: slideUp 1s ease-out 0.6s both;
-        }
-
-        .cta-button:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Products Section */
-        .products {
-            padding: 5rem 0;
-            background: #f8f9fa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250"><rect x="50" y="50" width="200" height="150" fill="rgba(255,255,255,0.1)" rx="10"/><circle cx="150" cy="100" r="30" fill="rgba(255,255,255,0.2)"/></svg>');
-            opacity: 0.6;
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .product-price {
-            font-size: 1.5rem;
-            color: #667eea;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-
-        .buy-button {
-            width: 100%;
-            padding: 0.8rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .buy-button:hover {
-            background: linear-gradient(45deg, #764ba2, #667eea);
-            transform: translateY(-2px);
-        }
-
-        /* Feedback Section */
-        .feedback {
-            padding: 5rem 0;
-            background: white;
-        }
-
-        .feedback-carousel {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        .feedback-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .feedback-item {
-            min-width: 100%;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .feedback-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            color: #666;
-        }
-
-        .feedback-author {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .dot.active {
-            background: #667eea;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-            background: #f8f9fa;
-        }
-
-        .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-button {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-button:hover {
-            background: linear-gradient(45deg, #764ba2, #667eea);
-            transform: translateY(-2px);
-        }
-
-        .error {
-            color: #e74c3c;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-icons a {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            text-align: center;
-            line-height: 40px;
-            border-radius: 50%;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
-        .social-icons a:hover {
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #555;
-            color: #999;
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: white;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 2rem;
-                transition: left 0.3s ease;
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <title>Elite Menswear - Premium Men's Fashion</title>
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">StyleCraft</a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#feedback">Feedback</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+<body bgcolor="#f8f9fa" text="#333" link="#007bff" vlink="#6c757d" alink="#0056b3">
+    <!-- Header with Navigation -->
+    <header>
+        <table width="100%" cellpadding="15" cellspacing="0" bgcolor="#1a1a1a" style="border-collapse: collapse;">
+            <tr>
+                <td width="30%" align="left">
+                    <font size="6" color="#ffffff" face="Arial, sans-serif">
+                        <b>🏴 ELITE MENSWEAR</b>
+                    </font>
+                </td>
+                <td width="70%" align="right">
+                    <nav>
+                        <table cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td><a href="#home" style="color: #ffffff; text-decoration: none; font-size: 18px; font-family: Arial, sans-serif; margin-right: 30px;"><b>HOME</b></a></td>
+                                <td width="30"></td>
+                                <td><a href="#products" style="color: #ffffff; text-decoration: none; font-size: 18px; font-family: Arial, sans-serif; margin-right: 30px;"><b>PRODUCTS</b></a></td>
+                                <td width="30"></td>
+                                <td><a href="#contact" style="color: #ffffff; text-decoration: none; font-size: 18px; font-family: Arial, sans-serif; margin-right: 30px;"><b>CONTACT</b></a></td>
+                                <td width="30"></td>
+                                <td><a href="#feedback" style="color: #ffffff; text-decoration: none; font-size: 18px; font-family: Arial, sans-serif;"><b>FEEDBACK</b></a></td>
+                            </tr>
+                        </table>
+                    </nav>
+                </td>
+            </tr>
+        </table>
+    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <img src="assets/hero.jpg" class="hero-image"/>
-            <h1>Welome to Menswear StyleCraft</h1>
-            <p>Discover premium menswear that combines timeless elegance with contemporary sophistication. Elevate your wardrobe with our curated collection.</p>
-            <a href="#products" class="cta-button">Shop Now</a>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home">
+            <table width="100%" cellpadding="50" cellspacing="0" bgcolor="#2c3e50" style="border-collapse: collapse; min-height: 500px;">
+                <tr>
+                    <td width="50%" align="center" valign="middle">
+                        <img src="assets/hero.jpg" alt="Stylish Man in Suit" width="350" height="450" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                    </td>
+                    <td width="50%" align="left" valign="middle">
+                        <div style="padding: 40px;">
+                            <h1 style="color: #ffffff; font-size: 48px; font-family: Arial, sans-serif; margin-bottom: 20px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+                                REDEFINE YOUR STYLE
+                            </h1>
+                            <h2 style="color: #ecf0f1; font-size: 24px; font-family: Arial, sans-serif; margin-bottom: 30px; font-weight: normal;">
+                                Premium menswear for the modern gentleman
+                            </h2>
+                            <p style="color: #bdc3c7; font-size: 18px; font-family: Arial, sans-serif; line-height: 1.6; margin-bottom: 30px;">
+                                Discover our curated collection of sophisticated suits, casual wear, and accessories designed for men who appreciate quality and style.
+                            </p>
+                            <table cellpadding="15" cellspacing="0" bgcolor="#e74c3c" style="border-radius: 5px;">
+                                <tr>
+                                    <td>
+                                        <a href="#products" style="color: #ffffff; text-decoration: none; font-size: 20px; font-family: Arial, sans-serif; font-weight: bold;">
+                                            EXPLORE COLLECTION
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </section>
 
-    <!-- Products Section -->
-    <section class="products" id="products">
-        <div class="container">
-            <h2 class="section-title fade-in">Our Collection</h2>
-            <div class="product-grid">
-                <div class="product-card fade-in">
-                    <img src="assets/full-length-portrait-handsome-successful-businessman.jpg"  class="product-image"/>
-                    <div class="product-info">
-                        <h3 class="product-name">Classic Business Suit</h3>
-                        <p class="product-price">₹2299</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src="assets/thoughtful-young-caucasian-delivery-man-red-uniform-cap-wearing-glasses-doing-think-gesture-isolated-olive-green-wall.jpg"  class="product-image"/>
-                    <div class="product-info">
-                        <h3 class="product-name">Designer Polo Shirt</h3>
-                        <p class="product-price">₹899</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                    <img src= "assets/full-length-portrait-handsome-serious-man.jpg" class="product-image"/>
-                    <div class="product-info">
-                        <h3 class="product-name">Evening Tuxedo</h3>
-                        <p class="product-price">₹1499</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                   <img src= "assets/shoes.jpg" class="product-image"/>
-                    <div class="product-info">
-                        <h3 class="product-name">Leather Dress Shoes</h3>
-                        <p class="product-price">₹1059</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-                     <img src= "assets/man-jacket-outside.jpg" class="product-image"/>
-                    <div class="product-info">
-                        <h3 class="product-name">Wool Overcoat</h3>
-                        <p class="product-price">₹999</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-                <div class="product-card fade-in">
-               <img src= "assets/close-up-stylish-traveler-jeans.jpg" class="product-image"/>
-                    <div class="product-info">
-                        <h3 class="product-name">Slim Fit Jeans</h3>
-                        <p class="product-price">₹799</p>
-                        <button class="buy-button">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Animated Announcement -->
+        <section>
+            <table width="100%" cellpadding="10" cellspacing="0" bgcolor="#e74c3c">
+                <tr>
+                    <td align="center">
+                        <marquee behavior="scroll" direction="left" scrollamount="3" style="color: #ffffff; font-size: 16px; font-family: Arial, sans-serif; font-weight: bold;">
+                            🔥 SUMMER SALE: Up to 50% OFF on Premium Suits | Free Shipping on Orders Over $200 | New Arrivals Every Week 🔥
+                        </marquee>
+                    </td>
+                </tr>
+            </table>
+        </section>
 
-    <!-- Feedback Section -->
-    <section class="feedback" id="feedback">
-        <div class="container">
-            <h2 class="section-title fade-in">What Our Clients Say</h2>
-            <div class="feedback-carousel">
-                <div class="feedback-track" id="feedbackTrack">
-                    <div class="feedback-item">
-                        <p class="feedback-text">"Exceptional quality and style. StyleCraft has transformed my professional wardrobe completely. The attention to detail is remarkable."</p>
-                        <p class="feedback-author">- Marcus Johnson, CEO</p>
-                    </div>
-                    <div class="feedback-item">
-                        <p class="feedback-text">"Outstanding customer service and premium products. I've been a loyal customer for three years and couldn't be happier with my purchases."</p>
-                        <p class="feedback-author">- David Chen, Architect</p>
-                    </div>
-                    <div class="feedback-item">
-                        <p class="feedback-text">"The perfect blend of classic and contemporary styles. Every piece I've bought has exceeded my expectations in both quality and fit."</p>
-                        <p class="feedback-author">- Robert Williams, Lawyer</p>
-                    </div>
-                </div>
-                <div class="carousel-dots">
-                    <div class="dot active" data-slide="0"></div>
-                    <div class="dot" data-slide="1"></div>
-                    <div class="dot" data-slide="2"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Products Section -->
+        <section id="products">
+            <table width="100%" cellpadding="40" cellspacing="0" style="border-collapse: collapse;">
+                <tr>
+                    <td align="center">
+                        <h2 style="font-size: 42px; font-family: Arial, sans-serif; color: #2c3e50; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">
+                            Featured Products
+                        </h2>
+                        <p style="font-size: 18px; font-family: Arial, sans-serif; color: #7f8c8d; margin-bottom: 40px;">
+                            Handpicked essentials for every occasion
+                        </p>
+                    </td>
+                </tr>
+            </table>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title fade-in">Get In Touch</h2>
-            <form class="contact-form fade-in" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                    <div class="error" id="nameError"></div>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                    <div class="error" id="emailError"></div>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                    <div class="error" id="messageError"></div>
-                </div>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-        </div>
-    </section>
+            <!-- Products Grid -->
+            <table width="100%" cellpadding="20" cellspacing="0" style="border-collapse: collapse;">
+                <tr>
+                    <!-- Product 1 -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 300px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=250&h=300&fit=crop" alt="Premium Business Suit" width="250" height="300" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <h3 style="font-size: 22px; font-family: Arial, sans-serif; color: #2c3e50; margin: 15px 0;">
+                                        Premium Business Suit
+                                    </h3>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.5; margin: 10px 0;">
+                                        Tailored to perfection with Italian wool blend. Perfect for boardroom meetings and formal events.
+                                    </p>
+                                    <p style="font-size: 24px; font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold; margin: 15px 0;">
+                                        $899
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Product 2 -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 300px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=250&h=300&fit=crop" alt="Casual Blazer" width="250" height="300" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <h3 style="font-size: 22px; font-family: Arial, sans-serif; color: #2c3e50; margin: 15px 0;">
+                                        Casual Blazer
+                                    </h3>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.5; margin: 10px 0;">
+                                        Versatile cotton blazer that transitions seamlessly from office to evening social events.
+                                    </p>
+                                    <p style="font-size: 24px; font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold; margin: 15px 0;">
+                                        $449
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Product 3 -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 300px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=250&h=300&fit=crop" alt="Dress Shirt Collection" width="250" height="300" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <h3 style="font-size: 22px; font-family: Arial, sans-serif; color: #2c3e50; margin: 15px 0;">
+                                        Dress Shirt Collection
+                                    </h3>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.5; margin: 10px 0;">
+                                        Egyptian cotton dress shirts with French cuffs. Available in classic white, blue, and patterns.
+                                    </p>
+                                    <p style="font-size: 24px; font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold; margin: 15px 0;">
+                                        $129
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Second Row of Products -->
+            <table width="100%" cellpadding="20" cellspacing="0" style="border-collapse: collapse;">
+                <tr>
+                    <!-- Product 4 -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 300px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=250&h=300&fit=crop" alt="Leather Shoes" width="250" height="300" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <h3 style="font-size: 22px; font-family: Arial, sans-serif; color: #2c3e50; margin: 15px 0;">
+                                        Oxford Leather Shoes
+                                    </h3>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.5; margin: 10px 0;">
+                                        Handcrafted genuine leather shoes with Goodyear welted construction for durability.
+                                    </p>
+                                    <p style="font-size: 24px; font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold; margin: 15px 0;">
+                                        $299
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Product 5 -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 300px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=250&h=300&fit=crop" alt="Silk Ties" width="250" height="300" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <h3 style="font-size: 22px; font-family: Arial, sans-serif; color: #2c3e50; margin: 15px 0;">
+                                        Silk Tie Collection
+                                    </h3>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.5; margin: 10px 0;">
+                                        Premium silk ties in classic patterns and solid colors. Perfect finishing touch for any outfit.
+                                    </p>
+                                    <p style="font-size: 24px; font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold; margin: 15px 0;">
+                                        $89
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Product 6 -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 300px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=250&h=300&fit=crop" alt="Luxury Watch" width="250" height="300" style="border-radius: 5px;">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    <h3 style="font-size: 22px; font-family: Arial, sans-serif; color: #2c3e50; margin: 15px 0;">
+                                        Luxury Timepiece
+                                    </h3>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.5; margin: 10px 0;">
+                                        Swiss-made automatic movement with leather strap. A timeless accessory for the discerning gentleman.
+                                    </p>
+                                    <p style="font-size: 24px; font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold; margin: 15px 0;">
+                                        $1,299
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Client Feedback Section -->
+        <section id="feedback">
+            <table width="100%" cellpadding="40" cellspacing="0" bgcolor="#ecf0f1" style="border-collapse: collapse;">
+                <tr>
+                    <td align="center">
+                        <h2 style="font-size: 42px; font-family: Arial, sans-serif; color: #2c3e50; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">
+                            Client Testimonials
+                        </h2>
+                        <p style="font-size: 18px; font-family: Arial, sans-serif; color: #7f8c8d; margin-bottom: 40px;">
+                            What our valued customers say about us
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Testimonials Grid -->
+            <table width="100%" cellpadding="30" cellspacing="0" bgcolor="#ecf0f1" style="border-collapse: collapse;">
+                <tr>
+                    <!-- Testimonial 1 -->
+                    <td width="50%" align="center" valign="top">
+                        <table cellpadding="30" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 500px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face" alt="Client James Wilson" width="80" height="80" style="border-radius: 50%; margin-bottom: 20px;">
+                                    <h4 style="font-size: 20px; font-family: Arial, sans-serif; color: #2c3e50; margin: 10px 0;">
+                                        James Wilson
+                                    </h4>
+                                    <p style="font-size: 14px; font-family: Arial, sans-serif; color: #95a5a6; margin-bottom: 20px;">
+                                        CEO, Wilson Enterprises
+                                    </p>
+                                    <blockquote style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.6; font-style: italic; margin: 0; padding: 0 20px;">
+                                        "The quality of Elite Menswear's suits is exceptional. I've been a loyal customer for over 3 years, and every piece I've purchased has exceeded my expectations. The attention to detail and craftsmanship is truly remarkable."
+                                    </blockquote>
+                                    <p style="font-size: 24px; color: #f39c12; margin: 20px 0;">
+                                        ⭐⭐⭐⭐⭐
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Testimonial 2 -->
+                    <td width="50%" align="center" valign="top">
+                        <table cellpadding="30" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 500px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=100&h=100&fit=crop&crop=face" alt="Client Michael Chen" width="80" height="80" style="border-radius: 50%; margin-bottom: 20px;">
+                                    <h4 style="font-size: 20px; font-family: Arial, sans-serif; color: #2c3e50; margin: 10px 0;">
+                                        Michael Chen
+                                    </h4>
+                                    <p style="font-size: 14px; font-family: Arial, sans-serif; color: #95a5a6; margin-bottom: 20px;">
+                                        Investment Banker
+                                    </p>
+                                    <blockquote style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.6; font-style: italic; margin: 0; padding: 0 20px;">
+                                        "Elite Menswear transformed my professional wardrobe. The fit is perfect, the fabric quality is outstanding, and the customer service is second to none. I receive compliments on my suits regularly. Highly recommended!"
+                                    </blockquote>
+                                    <p style="font-size: 24px; color: #f39c12; margin: 20px 0;">
+                                        ⭐⭐⭐⭐⭐
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Third Testimonial -->
+            <table width="100%" cellpadding="30" cellspacing="0" bgcolor="#ecf0f1" style="border-collapse: collapse;">
+                <tr>
+                    <td align="center">
+                        <table cellpadding="30" cellspacing="0" bgcolor="#ffffff" style="border-collapse: collapse; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 8px; width: 100%; max-width: 600px;">
+                            <tr>
+                                <td align="center">
+                                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face" alt="Client David Rodriguez" width="80" height="80" style="border-radius: 50%; margin-bottom: 20px;">
+                                    <h4 style="font-size: 20px; font-family: Arial, sans-serif; color: #2c3e50; margin: 10px 0;">
+                                        David Rodriguez
+                                    </h4>
+                                    <p style="font-size: 14px; font-family: Arial, sans-serif; color: #95a5a6; margin-bottom: 20px;">
+                                        Corporate Lawyer
+                                    </p>
+                                    <blockquote style="font-size: 16px; font-family: Arial, sans-serif; color: #7f8c8d; line-height: 1.6; font-style: italic; margin: 0; padding: 0 20px;">
+                                        "As a corporate lawyer, appearance matters greatly in my profession. Elite Menswear has become my go-to for all formal wear needs. The tailoring is impeccable, and the range of options allows me to maintain a sophisticated, professional image. The investment is worth every penny."
+                                    </blockquote>
+                                    <p style="font-size: 24px; color: #f39c12; margin: 20px 0;">
+                                        ⭐⭐⭐⭐⭐
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Contact Info Section -->
+        <section id="contact">
+            <table width="100%" cellpadding="40" cellspacing="0" bgcolor="#2c3e50" style="border-collapse: collapse;">
+                <tr>
+                    <td align="center">
+                        <h2 style="font-size: 42px; font-family: Arial, sans-serif; color: #ffffff; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 2px;">
+                            Get In Touch
+                        </h2>
+                        <p style="font-size: 18px; font-family: Arial, sans-serif; color: #bdc3c7; margin-bottom: 40px;">
+                            Visit our showroom or contact us for personalized styling
+                        </p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Contact Information Grid -->
+            <table width="100%" cellpadding="30" cellspacing="0" bgcolor="#2c3e50" style="border-collapse: collapse;">
+                <tr>
+                    <!-- Phone -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" style="border-collapse: collapse;">
+                            <tr>
+                                <td align="center">
+                                    <p style="font-size: 48px; margin: 0; color: #e74c3c;">📞</p>
+                                    <h3 style="font-size: 24px; font-family: Arial, sans-serif; color: #ffffff; margin: 15px 0;">
+                                        Phone
+                                    </h3>
+                                    <p style="font-size: 18px; font-family: Arial, sans-serif; color: #bdc3c7; margin: 10px 0;">
+                                        +1 (555) 123-4567
+                                    </p>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #95a5a6; margin: 5px 0;">
+                                        Monday - Saturday: 9AM - 7PM
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Email -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" style="border-collapse: collapse;">
+                            <tr>
+                                <td align="center">
+                                    <p style="font-size: 48px; margin: 0; color: #e74c3c;">✉️</p>
+                                    <h3 style="font-size: 24px; font-family: Arial, sans-serif; color: #ffffff; margin: 15px 0;">
+                                        Email
+                                    </h3>
+                                    <p style="font-size: 18px; font-family: Arial, sans-serif; color: #bdc3c7; margin: 10px 0;">
+                                        info@elitemenswear.com
+                                    </p>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #95a5a6; margin: 5px 0;">
+                                        We respond within 24 hours
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    <!-- Address -->
+                    <td width="33%" align="center" valign="top">
+                        <table cellpadding="20" cellspacing="0" style="border-collapse: collapse;">
+                            <tr>
+                                <td align="center">
+                                    <p style="font-size: 48px; margin: 0; color: #e74c3c;">📍</p>
+                                    <h3 style="font-size: 24px; font-family: Arial, sans-serif; color: #ffffff; margin: 15px 0;">
+                                        Address
+                                    </h3>
+                                    <p style="font-size: 18px; font-family: Arial, sans-serif; color: #bdc3c7; margin: 10px 0; line-height: 1.4;">
+                                        123 Fashion District<br>
+                                        New York, NY 10001<br>
+                                        United States
+                                    </p>
+                                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #95a5a6; margin: 5px 0;">
+                                        Free parking available
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>StyleCraft</h3>
-                    <p>Premium menswear for the modern gentleman. Crafting excellence since 2010.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <p><a href="#home" style="color: #999; text-decoration: none;">Home</a></p>
-                    <p><a href="#products" style="color: #999; text-decoration: none;">Products</a></p>
-                    <p><a href="#feedback" style="color: #999; text-decoration: none;">Feedback</a></p>
-                    <p><a href="#contact" style="color: #999; text-decoration: none;">Contact</a></p>
-                </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#">f</a>
-                        <a href="#">t</a>
-                        <a href="#">i</a>
-                        <a href="#">l</a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 StyleCraft. All rights reserved.</p>
-            </div>
-        </div>
+    <footer>
+        <table width="100%" cellpadding="30" cellspacing="0" bgcolor="#1a1a1a" style="border-collapse: collapse;">
+            <tr>
+                <td align="center">
+                    <p style="font-size: 16px; font-family: Arial, sans-serif; color: #bdc3c7; margin: 0; line-height: 1.6;">
+                        &copy; 2025 Elite Menswear. All rights reserved. | 
+                        <a href="#" style="color: #e74c3c; text-decoration: none;">Privacy Policy</a> | 
+                        <a href="#" style="color: #e74c3c; text-decoration: none;">Terms of Service</a> | 
+                        <a href="#" style="color: #e74c3c; text-decoration: none;">Size Guide</a>
+                    </p>
+                    <p style="font-size: 14px; font-family: Arial, sans-serif; color: #7f8c8d; margin: 15px 0 0 0;">
+                        Crafted with passion for the modern gentleman | Follow us on social media for style inspiration
+                    </p>
+                </td>
+            </tr>
+        </table>
     </footer>
-
-    <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu toggle
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        navLinks.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A') {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Feedback carousel
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.feedback-item');
-        const dots = document.querySelectorAll('.dot');
-        const track = document.getElementById('feedbackTrack');
-
-        function showSlide(n) {
-            currentSlide = n;
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
-            
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => showSlide(index));
-        });
-
-        // Auto-advance carousel
-        setInterval(() => {
-            currentSlide = (currentSlide + 1) % slides.length;
-            showSlide(currentSlide);
-        }, 5000);
-
-        // Form validation
-        const form = document.getElementById('contactForm');
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const messageInput = document.getElementById('message');
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        function showError(input, message) {
-            const errorElement = document.getElementById(input.id + 'Error');
-            errorElement.textContent = message;
-            input.style.borderColor = '#e74c3c';
-        }
-
-        function clearError(input) {
-            const errorElement = document.getElementById(input.id + 'Error');
-            errorElement.textContent = '';
-            input.style.borderColor = '#ddd';
-        }
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            let isValid = true;
-            
-            // Clear previous errors
-            clearError(nameInput);
-            clearError(emailInput);
-            clearError(messageInput);
-            
-            // Validate name
-            if (nameInput.value.trim().length < 2) {
-                showError(nameInput, 'Name must be at least 2 characters long');
-                isValid = false;
-            }
-            
-            // Validate email
-            if (!validateEmail(emailInput.value)) {
-                showError(emailInput, 'Please enter a valid email address');
-                isValid = false;
-            }
-            
-            // Validate message
-            if (messageInput.value.trim().length < 10) {
-                showError(messageInput, 'Message must be at least 10 characters long');
-                isValid = false;
-            }
-            
-            if (isValid) {
-                alert('Thank you for your message! We will get back to you soon.');
-                form.reset();
-            }
-        });
-
-        // Clear errors on input
-        [nameInput, emailInput, messageInput].forEach(input => {
-            input.addEventListener('input', () => clearError(input));
-        });
-
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Add click handlers to buy buttons
-        document.querySelectorAll('.buy-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const productName = e.target.closest('.product-card').querySelector('.product-name').textContent;
-                alert(`Thank you for your interest in ${productName}! This would normally redirect to our checkout page.`);
-            });
-        });
-    </script>
 </body>
 </html>
